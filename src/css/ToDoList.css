@@ -1,0 +1,188 @@
+.todo-list {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.todo-list h1 {
+    text-align: center;
+    color: #333;
+}
+
+.todo-list form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.todo-list input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.todo-list button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.todo-list button:hover {
+    background-color: #0056b3;
+}
+
+.todo-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.todo-list li.completed {
+    background-color: green;
+}
+
+.todo-list li.incomplete {
+    background-color: yellow;
+    text-decoration: underline;
+}
+
+.todo-list li p {
+    margin: 0;
+    flex: 1;
+}
+
+.todo-list li span {
+    margin: 0 10px;
+    color: #666;
+}
+
+.todo-list li .toggle {
+    background-color: #28a745;
+}
+
+.todo-list li .toggle:hover {
+    background-color: #218838;
+}
+
+.todo-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+.todo-table th,
+.todo-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+.todo-table th {
+    background: #eee;
+}
+.todo-table tr.completed td {
+    background: #d4edda;
+}
+.todo-table tr.incomplete td {
+    background: #fff3cd;
+}
+
+.todo-table th.actions-col,
+.todo-table td.actions-col {
+    width: 250px; /* or whatever width fits your buttons comfortably */
+    min-width: 140px;
+    max-width: 180px;
+    text-align: center;
+}
+.todo-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.todo-table th,
+.todo-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Fixed widths for each column */
+.todo-table p.completed {
+    background: #d4edda;
+    text-decoration: line-through;
+}
+
+.todo-table p.incomplete {
+    background: #fff3cd;
+    text-decoration: underline;
+}
+
+.todo-table tr.completed {
+    background: #d4edda;    /* green background for completed row */
+}
+.todo-table tr.incomplete {
+    background: #fff3cd;    /* yellow background for incomplete row */
+}
+
+.todo-table th.attendee-col,
+.todo-table td.attendee-col .attendee-span {
+    white-space: normal;   /* allows wrapping */
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+}
+
+.attendee-span {
+    display: block; /* or inline-block if you want */
+    width: 100%;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.todo-table th.actions-col,
+.todo-table td.actions-col {
+    width: 250px;
+    min-width: 140px;
+    max-width: 200px;
+    text-align: center;
+}
+
+.todo-table th {
+    background: #eee;
+}
+
+/* You can keep or adjust your row coloring */
+.todo-table tr.completed td {
+    background: #d4edda;
+}
+.todo-table tr.incomplete td {
+    background: #fff3cd;
+}
+
+.todo-table .delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.todo-table .delete:hover {
+    background-color: #a71d2a;
+}
+
