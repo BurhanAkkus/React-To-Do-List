@@ -76,26 +76,18 @@ const ToDoList: React.FC = () => {
         );
     };
 
+    const setAttendee = (task:Task, attendee:string)=> {
+        setTasks(
+            tasks.map((t) =>
+                t.id === task.id
+                    ? { ...t, attendee: attendee || '' }
+                    : t
+            )
+        );
+    }
+
     const handleAssignClick = (task: Task) => {
-        if (!task.attendee || editAttendee[task.id]) {
-            // Assign or re-assign
-            setTasks(
-                tasks.map((t) =>
-                    t.id === task.id
-                        ? { ...t, attendee: attendeeInputs[task.id] || '' }
-                        : t
-                )
-            );
-            setEditAttendee((prev) => ({ ...prev, [task.id]: false }));
-            setAttendeeInputs((prev) => {
-                const { [task.id]: _, ...rest } = prev;
-                return rest;
-            });
-        } else {
-            // Switch to edit mode, pre-fill with current attendee
-            setEditAttendee((prev) => ({ ...prev, [task.id]: true }));
-            setAttendeeInputs((prev) => ({ ...prev, [task.id]: task.attendee || '' }));
-        }
+        setEditAttendee((prev) => ({ ...prev,  [task.id]: !prev[task.id] }));
     };
 
     return (
@@ -131,7 +123,7 @@ const ToDoList: React.FC = () => {
                 <thead>
                 <tr>
                     <th>Task</th>
-                    <th>Attendee</th>
+                    <th className="attendee-col">Attendee</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -145,18 +137,15 @@ const ToDoList: React.FC = () => {
                             {(!task.attendee || editAttendee[task.id]) ? (
                                 <input
                                     type="text"
-                                    value={attendeeInputs[task.id] || ''}
+                                    value={task.attendee || ''}
                                     placeholder="Assign attendee"
                                     style={{ width: "80%" }}
                                     onChange={(e) =>
-                                        setAttendeeInputs({
-                                            ...attendeeInputs,
-                                            [task.id]: e.target.value,
-                                        })
-                                    }
+                                        setAttendee(task,e.target.value)
+                                        }
                                 />
                             ) : (
-                                <span>{task.attendee}</span>
+                                <span className="attendee-span">{task.attendee}</span>
                             )}
                         </td>
                         <td className="actions-col">

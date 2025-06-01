@@ -136,23 +136,40 @@
     background: #fff3cd;    /* yellow background for incomplete row */
 }
 
-.todo-table th.attendee-col,
-.todo-table td.attendee-col .attendee-span {
-    white-space: normal;   /* allows wrapping */
-    word-break: break-word;
-    overflow-wrap: anywhere;
-    width: 100%;
+.todo-table td.attendee-col {
+    width: 200px;         /* Genişlik ihtiyacına göre ayarla */
+    min-width: 200px;
+    max-width: 200px;
     box-sizing: border-box;
     padding: 8px;
 }
-
-.attendee-span {
-    display: block; /* or inline-block if you want */
+.todo-table td.attendee-col input {
+    background: #fff;         /* beyaz arka plan */
+    border: 1px solid #ddd;   /* net kenarlık */
+    color: #222;
+    padding: 6px;
+    border-radius: 4px;
     width: 100%;
-    white-space: normal;
-    word-break: break-word;
-    overflow-wrap: anywhere;
+    min-height: 32px;
+    box-sizing: border-box;
 }
+.todo-table td.attendee-col span,
+.todo-table td.attendee-col .attendee-span {
+     width: 100%;
+     min-width: 0;
+     max-width: 100%;
+     box-sizing: border-box;
+     display: block;
+     /* Aynı yüksekliği koru */
+     min-height: 36px;    /* Butonla hizalı olsun diye */
+     line-height: 36px;
+     background: transparent;
+     border: none;        /* İstersen border bırakabilirsin */
+     padding: 0 4px;
+     text-align: left;
+     overflow-wrap: break-word;
+     word-break: break-word;
+ }
 
 .todo-table th.actions-col,
 .todo-table td.actions-col {
