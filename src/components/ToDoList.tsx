@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../css/ToDoList.css';
 
 interface Task {
@@ -7,9 +7,17 @@ interface Task {
     attendee?: string;
     completed: boolean;
 }
-
+const DEFAULT_TASKS: Task[] = [
+    { id: 1, text: "Filtre Ekle", completed: false, attendee: "Burhan" },
+    { id: 2, text: "Ecof Uygulaması Yap", completed: false, attendee: "Burhan" },
+    { id: 3, text: "Köylü Basmayı Öğren", completed: false, attendee: "Ozan" },
+    { id: 4, text: "Makro Yönetmeyi Öğren", completed: false, attendee: "Teoman" },
+    { id: 5, text: "Kolon Boylarını Sabitle", completed: false, attendee: "Burhan" }
+];
 const ToDoList: React.FC = () => {
-    const [tasks, setTasks] = useState<Task[]>([]);
+    const [tasks, setTasks] = useState<Task[]>(DEFAULT_TASKS);
+    const [filteredTasks, setFilteredTasks] = useState<Task[]>(tasks);
+    const [taskFilter, setTaskFilter] = useState<Task>();
     const [newTask, setNewTask] = useState<string>('');
     const [attendeeInputs, setAttendeeInputs] = useState<{ [id: number]: string }>({});
     const [editAttendee, setEditAttendee] = useState<{ [id: number]: boolean }>({});
@@ -28,6 +36,25 @@ const ToDoList: React.FC = () => {
             setNewTask('');
         }
     };
+
+    const filterTasks = () =>{
+        let tasksToFilter: Task[] = tasks
+
+        if(taskFilter){
+            if(taskFilter.text && taskFilter.text.length > 0)
+            {
+                tasksToFilter = tasksToFilter.filter(task => task.text.toLowerCase().includes(taskFilter.text.toLowerCase()))
+            }
+            if(taskFilter.attendee && taskFilter.attendee.length > 0){
+                tasksToFilter = tasksToFilter.filter(task => task.attendee.toLowerCase().includes(taskFilter.attendee.toLowerCase()))
+            }
+        }
+        setFilteredTasks(tasksToFilter)
+    }
+
+    useEffect(() =>{
+        filterTasks()
+    },[taskFilter])
 
     const deleteTask = (taskId: number) => {
         setTasks(tasks.filter(task => task.id !== taskId));
@@ -83,6 +110,23 @@ const ToDoList: React.FC = () => {
                 />
                 <button type="submit">Add Task</button>
             </form>
+
+            <form onSubmit={filterTasks}>
+            <input
+                type="text"
+                value={taskFilter?.text || ''}
+                onChange={(e) => setTaskFilter(prev => ({ ...prev, text: e.target.value }))}
+                placeholder="Task Name Filter"
+            />
+            <input
+                type="text"
+                value={taskFilter?.attendee || ''}
+                onChange={(e) => setTaskFilter(prev => ({ ...prev, attendee: e.target.value }))}
+                placeholder="Attendee Filter"
+            />
+
+                <button type="submit">Filter Tasks</button>
+            </form>
             <table className="todo-table">
                 <thead>
                 <tr>
@@ -92,7 +136,7 @@ const ToDoList: React.FC = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {tasks.map((task) => (
+                {filteredTasks.map((task) => (
                     <tr key={task.id} className={task.completed ? "completed" : "incomplete"}>
                         <td className="task-col">
                             <p className={task.completed ? 'completed' : 'incomplete'}>{task.text}</p>
